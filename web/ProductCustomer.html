@@ -1,0 +1,297 @@
+<!-- Home Page -->
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Astro v5.9.2">
+  <title>My Store | Graphics Card Online Shop</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/product/">
+  <script src="../assets/js/color-modes.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="theme-color" content="#712cf9">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body>
+  <!-- Nav Bar -->
+  <div id="navbar-container"></div>
+
+
+  <main>
+
+    <!-- อธิบายเกี่ยวกับ หน้า Product -->
+    <section class="py-5 text-center container">
+      <div class="row">
+        <h1 class="fw-light" style="margin-bottom: 20px; text-transform: uppercase;">All product in My Store</h1>
+        <div class="col-lg-4 col-md-8 mx-auto">
+          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/1400_webp/8e4313112554403.60186ea0c7798.jpg"
+            class="img-fluid mb-4" alt="Example">
+          <h5 class="fw-light">INTEL</h5>
+          <p class="lead text-body-secondary" style="text-align: justify; line-height:1.6; font-size: 0.95rem;">The Arc
+            series includes A-series, B-series, and Arc Pro GPUs for gaming
+            and content creation, competing with NVIDIA and AMD, and supporting ray tracing and AI upscaling.
+          </p>
+        </div>
+        <div class="col-lg-4 col-md-8 mx-auto">
+          <img src="https://wallpaperbat.com/img/9712345-nvidia-wallpaper.jpg" class="img-fluid mb-4" alt="Example">
+          <h5 class="fw-light">NVIDIA</h5>
+          <p class="lead text-body-secondary" style="text-align: justify; line-height:1.6; font-size: 0.95rem;">The RTX
+            series offers high-performance GPUs for gaming and content
+            creation, featuring ray tracing, AI, and strong visual fidelity across RTX 20, 30, 40 and 50 models.
+          </p>
+        </div>
+        <div class="col-lg-4 col-md-8 mx-auto">
+          <img src="https://cdn.thefpsreview.com/wp-content/uploads/2020/10/amd-logo-ruby-red.jpg.webp"
+            class="img-fluid mb-4" alt="Example">
+          <h5 class="fw-light">AMD</h5>
+          <p class="lead text-body-secondary" style="text-align: justify; line-height:1.6; font-size: 0.95rem;">The
+            Radeon RX 9000 series (RDNA 4) is AMD’s latest gaming GPU line, offering high performance, visual fidelity,
+            AI acceleration, ray tracing, and upscaling.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- Filter Section -->
+    <div class="container mb-4">
+      <div class="row justify-content-end">
+        <!-- Filter by Brand -->
+        <div class="col-auto ">
+          <select id="brandFilter" class="form-select">
+            <option value="all">All Brands</option>
+            <option value="NVIDIA">NVIDIA</option>
+            <option value="AMD">AMD</option>
+            <option value="intel">Intel ARC</option>
+          </select>
+        </div>
+
+        <!-- Sort by Price -->
+        <div class="col-auto">
+          <select id="priceSort" class="form-select">
+            <option value="none">Sort by Price</option>
+            <option value="asc">Price: Low to High</option>
+            <option value="desc">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="album py-5 bg-body-tertiary">
+
+
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="cusproductlist"></div>
+      </div>
+    </div>
+
+    <!-- Review Section -->
+    <section class="container my-5">
+      <h4 class="mb-4 fw-bold">Customer Reviews</h4>
+
+      <!-- Write Review (เฉพาะ customer) -->
+      <div id="reviewForm" class="card p-3 mb-4 d-none">
+        <div class="mb-2">
+          <label class="form-label">Rating</label>
+          <select id="rating" class="form-select">
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★☆</option>
+            <option value="3">★★★☆☆</option>
+            <option value="2">★★☆☆☆</option>
+            <option value="1">★☆☆☆☆</option>
+          </select>
+        </div>
+        <div class="mb-2">
+          <textarea id="comment" class="form-control" placeholder="Write your review..."></textarea>
+        </div>
+        <button class="btn btn-dark" onclick="submitReview()">Submit Review</button>
+      </div>
+
+      <!-- Review List -->
+      <div id="reviewList"></div>
+    </section>
+
+  </main>
+
+  <footer class="footer-custom py-5">
+    <div class="container">
+      <div class="row text-center text-md-start align-items-center">
+
+        <!-- Contact Column -->
+        <div class="col-md-6 mb-3 mb-md-0">
+          <h6 class="fw-bold">My Store</h6>
+          <p class="mb-1">
+            My Store thanks all our customers for your trust and support. We're proud to deliver top-quality graphic
+            cards for the best gaming experience, and we hope you enjoy the very best from us.
+          </p>
+        </div>
+
+
+        <!-- Social Media Column -->
+        <div class="col-md-3 mb-3 mb-md-0">
+          <h6 class="fw-bold">Product</h6>
+          <p class="mb-1"><i class="bi bi-nvidia me-2"></i></i>NVIDIA Geforce RTX series</p>
+          <p class="mb-1"><i class="bi bi-amd me-2"></i></i>AMD RADEON</p>
+          <p class="mb-1"><i class="bi bi-cpu me-2"></i></i>intel ARC™</p>
+        </div>
+
+        <!-- Contact Column -->
+        <div class="col-md-3 mb-3 mb-md-0">
+          <h6 class="fw-bold">Contact</h6>
+          <p class="mb-1"><i class="bi bi-telephone-fill me-2"></i>089-765-4321</p>
+          <p class="mb-1"><i class="bi bi-envelope-fill me-2"></i>My_Store_s@gmail.com</p>
+          <p class="mb-1"><i class="bi bi-geo-alt-fill me-2"></i>location</p>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="text-center mt-4">
+        <div class="social-icons">
+          <a href="https://www.facebook.com/" target="_blank" class="me-3"><i class="bi bi-facebook"></i></a>
+          <a href="https://twitter.com/" target="_blank" class="me-3"><i class="bi bi-twitter-x"></i></a>
+          <a href="https://www.instagram.com/" target="_blank" class="me-3"><i class="bi bi-instagram"></i></a>
+          <a href="https://line.me/th/" target="_blank"><i class="bi bi-line"></i></a>
+
+        </div>
+        <p class="mb-1">All rights reserved &copy; Aug 2025 My Portfolio My Store</p>
+        <p><a href="#" class="text-decoration-none">Back to top</a></p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+
+    var datascus = []
+    var token = localStorage.getItem("token") || "";
+    function getlistcus() {
+      $.ajax({
+        url: '/api/products',
+        type: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + token
+        },
+        success: function (data) {
+          datascus = data;
+          console.log(datascus);
+          drawdiv(datascus);
+        },
+        error: function (err) {
+          if (err.status === 401 || err.status === 403) {
+            alert('คุณไม่มีสิทธิ์เข้าหน้านี้');
+            window.location.href = '/login';
+          }
+        }
+      });
+    }
+
+
+    function drawdiv(datascus) {
+      var cusproductstring = document.getElementById("cusproductlist")
+      var strcus = ""
+      for (var i = 0; i < datascus.length; i++) {
+        strcus += `<div class="col" data-id="`+ datascus[i].id + `" data-name="` + datascus[i].name + `" data-brand="` + datascus[i].description + `" data-price="` + datascus[i].price + `">
+                              <div class="product-item card shadow-sm">
+                                <img src="` + datascus[i].img_url + `" class="bd-placeholder-img card-img-top"
+                                  alt="RTX 3070" style="height: 225px; object-fit: cover; width: 100%; border-color: black;">
+
+                                <div class="card-body">
+                                  <h5>` + datascus[i].name + `</h5>
+                                  <p class="card-text">Price : ` + datascus[i].price.toLocaleString() + ` Baht</p>
+                                  <p class="card-text">Qty : ` + datascus[i].stock + `</p>
+                                  <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                      <a href="/detail/` + datascus[i].id + `" class="btn btn-sm btn-outline-secondary me-2">View Detail</a>
+                                      <button type="button" class="btn btn-sm btn-outline-secondary add-to-cart">Add to Cart</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>`
+      }
+      cusproductstring.innerHTML = strcus
+    }
+
+    getlistcus();
+
+  </script>
+
+  <!-- Review Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      const user = JSON.parse(localStorage.getItem('user'));
+      const token = localStorage.getItem('token') || '';
+
+      if (user && user.role === 'customer') {
+        document.getElementById('reviewForm').classList.remove('d-none');
+      }
+
+      loadReviews();
+
+      async function loadReviews() {
+        const res = await fetch('/api/reviews');
+        const data = await res.json();
+
+        const list = document.getElementById('reviewList');
+        list.innerHTML = '';
+
+        data.forEach(r => {
+          list.innerHTML += `
+        <div class="card mb-3">
+          <div class="card-body">
+            <h6 class="fw-bold">${r.username}
+              <span class="text-warning">${'★'.repeat(r.rating)}</span>
+            </h6>
+            <p>${r.comment}</p>
+          </div>
+        </div>
+      `;
+        });
+      }
+
+      globalThis.submitReview = async function () {
+        const rating = document.getElementById('rating').value;
+        const comment = document.getElementById('comment').value;
+
+        // แก้ไข POST fail แต่ frontend ไม่รู้ (แจ้ง user ว่า POST Fail)
+        const res = await fetch('/api/reviews', {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            product_id: 1,
+            rating,
+            comment
+          })
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          alert(err.message || 'Submit review failed');
+          return;
+        }
+
+        document.getElementById('comment').value = '';
+        loadReviews();
+      };
+
+    });
+  </script>
+
+  <!-- Navbar Script -->
+  <script src="/js/navbar.js"></script>
+</body>

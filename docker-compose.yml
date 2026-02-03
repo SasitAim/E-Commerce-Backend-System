@@ -1,0 +1,31 @@
+services:
+  backend:
+    build: .
+    container_name: midterm_backend
+    environment:
+      PORT: 3000
+
+      # MySQL บนเครื่อง
+      ECOM_DB_HOST: host.docker.internal
+      ECOM_DB_PORT: 3306
+      ECOM_DB_USER: dockeruser
+      ECOM_DB_PASSWORD: dockerpass
+      ECOM_DB_NAME: ecommerce
+
+      # MongoDB บนเครื่อง
+      MONGO_URI: mongodb://host.docker.internal:27017/ecommerce_review
+    ports:
+      - "3000:3000"
+    networks: [appnet]
+
+  frontend:
+    build: ./web
+    container_name: midterm_frontend
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+    networks: [appnet]
+
+networks:
+  appnet:

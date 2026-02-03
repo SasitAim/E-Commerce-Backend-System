@@ -1,0 +1,202 @@
+<!-- Cart Page -->
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Astro v5.9.2">
+  <title>My Store | Graphics Card Online Shop</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/product/">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="theme-color" content="#712cf9">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style/style.css">
+</head>
+
+
+<body>
+  <!-- Nav Bar -->
+  <div id="navbar-container"></div>
+
+  <main>
+
+
+    <section class=" text-center container">
+
+      <div class="py-5 text-center">
+        <h1 class="h2">Checkout Your Product</h1>
+        <p class="lead">You're almost there! Review your graphics card order from NVIDIA, AMD, or Intel, then proceed to
+          checkout. Thank you for shopping with My Store — powering up your gaming experience starts here!</p>
+      </div>
+      <hr>
+    </section>
+
+
+    <!-- ************************************************************* -->
+    <div class="container mt-4">
+      <div class="row g-5">
+        <!-- ********************** Your cart ******************************** -->
+        <div class="col-md-5 col-lg-5 order-md-last">
+          <h4 class="d-flex justify-content-between align-items-center mb-3"> <span class="text-primary"> <i
+                class="bi bi-bag-check-fill me-2"></i>Your
+              cart</span></h4>
+
+          <ul class="list-group mb-3" id="cart-items">
+            <!-- Cart items will be added here by JavaScript -->
+          </ul>
+          <p>Total: <span id="cart-total">0.00</span></p>
+        </div>
+
+        <!-- ********************** Billing address ******************************** -->
+        <div class="col-md-7 col-lg-7">
+          <h4 class="mb-3">Billing address</h4>
+          <form class="needs-validation" novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6"> <label for="firstName" class="form-label">First name</label> <input type="text"
+                  class="form-control" id="firstName_Cart" placeholder="First name" value="" required>
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+              <div class="col-sm-6"> <label for="lastName" class="form-label">Last name</label> <input type="text"
+                  class="form-control" id="lastName_Cart" placeholder="Last name" value="" required>
+                <div class="invalid-feedback">
+                  Valid last name is required.
+                </div>
+              </div>
+              <div class="col-12"> <label for="email" class="form-label">Email <span
+                    class="text-body-secondary">(Optional)</span></label> <input type="email" class="form-control"
+                  id="email_Cart" placeholder="you@example.com">
+                <div class="invalid-feedback">
+                  Please enter a valid email address for shipping updates.
+                </div>
+              </div>
+              <div class="col-12"> <label for="address" class="form-label">Address</label> <input type="text"
+                  class="form-control" id="address_Cart" placeholder="1234 Main St" required>
+                <div class="invalid-feedback">
+                  Please enter your shipping address.
+                </div>
+              </div>
+              <div class="col-12"> <label for="address2" class="form-label">Address 2 <span
+                    class="text-body-secondary">(Optional)</span></label> <input type="text" class="form-control"
+                  id="address2_Cart" placeholder="Apartment or suite"> </div>
+
+              <div class="col-md-5"> <label for="country" class="form-label">Country</label> <input type="text"
+                  class="form-control" id="country_Cart" placeholder="Enter your country" required>
+                <div class="invalid-feedback">
+                  Please select a valid country.
+                </div>
+              </div>
+
+              <div class="col-md-4"> <label for="state" class="form-label">State</label> <input type="text"
+                  class="form-control" id="state_Cart" placeholder="Enter your state" required>
+                <div class="invalid-feedback">
+                  Please provide a valid state.
+                </div>
+              </div>
+
+              <div class="col-md-3"> <label for="zip" class="form-label">Zip</label> <input type="text"
+                  class="form-control" id="zip_Cart" placeholder="Zip code" required>
+                <div class="invalid-feedback">
+                  Zip code required.
+                </div>
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ************************************* -->
+    <div class="container mt-4">
+      <!-- <hr> -->
+      <div class="row g-4">
+
+      </div>
+      <hr class="my-4">
+      <button onclick="GetBillAddInf()" class="w-100 btn btn-primary btn-lg" type="button">Continue to checkout</button>
+  </main>
+  <br>
+
+  <footer class="footer-custom py-5">
+    <div class="container">
+      <div class="row text-center text-md-start align-items-center">
+
+        <!-- Contact Column -->
+        <div class="col-md-6 mb-3 mb-md-0">
+          <h6 class="fw-bold">My Store</h6>
+          <p class="mb-1">
+            My Store thanks all our customers for your trust and support. We're proud to deliver top-quality graphic
+            cards for the best gaming experience, and we hope you enjoy the very best from us.
+          </p>
+        </div>
+
+
+        <!-- Social Media Column -->
+        <div class="col-md-3 mb-3 mb-md-0">
+          <h6 class="fw-bold">Product</h6>
+          <p class="mb-1"><i class="bi bi-nvidia me-2"></i></i>NVIDIA Geforce RTX series</p>
+          <p class="mb-1"><i class="bi bi-amd me-2"></i></i>AMD RADEON</p>
+          <p class="mb-1"><i class="bi bi-cpu me-2"></i></i>intel ARC™</p>
+        </div>
+
+        <!-- Contact Column -->
+        <div class="col-md-3 mb-3 mb-md-0">
+          <h6 class="fw-bold">Contact</h6>
+          <p class="mb-1"><i class="bi bi-telephone-fill me-2"></i>089-765-4321</p>
+          <p class="mb-1"><i class="bi bi-envelope-fill me-2"></i>My_Store_s@gmail.com</p>
+          <p class="mb-1"><i class="bi bi-geo-alt-fill me-2"></i>location</p>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="text-center mt-4">
+        <div class="social-icons">
+          <a href="https://www.facebook.com/" target="_blank" class="me-3"><i class="bi bi-facebook"></i></a>
+          <a href="https://twitter.com/" target="_blank" class="me-3"><i class="bi bi-twitter-x"></i></a>
+          <a href="https://www.instagram.com/" target="_blank" class="me-3"><i class="bi bi-instagram"></i></a>
+          <a href="https://line.me/th/" target="_blank"><i class="bi bi-line"></i></a>
+        </div>
+        <p class="mb-1">All rights reserved &copy; Aug 2025 My Portfolio My Store</p>
+        <p><a href="#" class="text-decoration-none">Back to top</a></p>
+      </div>
+    </div>
+  </footer>
+  <!-- Modal Delete-->
+  <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="statusModalLabel">สถานะ</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body text-center">
+          สั่งสินค้าเรียบร้อยแล้ว
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="script.js"></script>
+
+
+
+  <!-- Navbar Script -->
+  <script src="/js/navbar.js"></script>
+  <script src="/js/navbar.js"></script>
+</body>

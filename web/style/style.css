@@ -1,0 +1,258 @@
+.container {
+  max-width: 960px;
+}
+
+.icon-link > .bi {
+  width: .75em;
+  height: .75em;
+}
+
+/*
+ * Custom translucent site header
+ */
+
+.site-header {
+  background-color: rgba(0, 0, 0, .85);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+.site-header a {
+  color: #8e8e8e;
+  transition: color .15s ease-in-out;
+}
+.site-header a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+/*
+ * Dummy devices (replace them with your own or something else entirely!)
+ */
+
+.product-device {
+  position: absolute;
+  right: 10%;
+  bottom: -30%;
+  width: 300px;
+  height: 540px;
+  background-color: #333;
+  border-radius: 21px;
+  transform: rotate(30deg);
+}
+
+.product-device::before {
+  position: absolute;
+  top: 10%;
+  right: 10px;
+  bottom: 10%;
+  left: 10px;
+  content: "";
+  background-color: rgba(255, 255, 255, .1);
+  border-radius: 5px;
+}
+
+.product-device-2 {
+  top: -25%;
+  right: auto;
+  bottom: 0;
+  left: 5%;
+  background-color: #e5e5e5;
+}
+
+
+.footer-custom {
+  background-color: #f8f9fa;
+  color: #333;
+  font-size: 0.95rem;
+  border-top: 1px solid #ddd;
+}
+
+.footer-custom h6 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: #000;
+}
+
+.footer-custom a {
+  color: #333;
+  transition: color 0.3s;
+}
+
+.footer-custom a:hover {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.footer-custom .social-icons i {
+  font-size: 1.4rem;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.footer-custom .social-icons i:hover {
+  color: #0d6efd;
+}
+
+
+/* main-fixed-width */
+.main-fixed-width {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.product-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-news:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ********************************* Filter in Product Page ********************************* */
+.btn-filter {
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-filter:hover {
+  background-color: black;
+  color: white;
+}
+
+.btn-filter.active {
+  background-color: black;
+  color: white;
+}
+
+
+/* ********************************* Best-Selling and Discout ********************************* */
+/* Best-Selling*/
+.BS {
+  order: -1;
+}
+
+/* เปลี่ยนสีสำหรับรายการพิเศษ */
+.BS2 .card-body h5,
+.BS2 .card-body p {
+  color: rgb(122, 118, 118);
+  transition: color 0.3s ease; 
+}
+
+.BS2:hover .card-body h5,
+.BS2:hover .card-body p {
+  color: #000;
+}
+.BS2 .card-body h5::after {
+  content: " (Best Selling)"; /* เพิ่ม (Best Selling) สำหรับสินค้าขายดี*/
+  color:#28A745; 
+}
+
+/* Discount */
+.DS{
+  order: -2;
+}
+
+/* เปลี่ยนสีสำหรับรายการพิเศษ */
+.DS2 .card-body h5,
+.DS2 .card-body p{
+  color: rgb(122, 118, 118);
+  transition: color 0.3s ease; 
+}
+
+.DS2:hover .card-body h5,
+.DS2:hover .card-body p{
+  color: #000;
+}
+
+.DS2 .card-body h5::after{
+  content: " (Discount)"; /* เพิ่ม (Discount) สำหรับสินค้าลดราคา*/
+  color:#166BE9; 
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.new-price {
+  color: red;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+/* Product page style Brands  */
+.product-description p {
+  text-align: justify;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+.product-description h5 {
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+
+/*
+ * Extra utilities
+ */
+
+.flex-equal > * {
+  flex: 1;
+}
+@media (min-width: 768px) {
+  .flex-md-equal > * {
+    flex: 1;
+  }
+}
+
+.bg-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 3rem 1rem; /* เดิม p-3 */
+  margin: 0; /* เคลียร์ margin เดิม m-md-3 */
+  text-align: center;
+  background-image: url('https://gazlog.jp/wp-content/uploads/2022/11/3company-base.jpg.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 300px; /* กำหนดความสูง */
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ปรับสำหรับหน้าจอขนาดกลางขึ้นไป (md) */
+@media (min-width: 768px) {
+  .bg-hero {
+    padding: 3rem 3rem; /* p-md-5 */
+    margin: 1rem 1rem; /* m-md-3 */
+    height: 300px; /* ความสูงคงที่ */
+  }
+}
+
+/* ปรับสำหรับหน้าจอเล็กลง (sm) */
+@media (max-width: 767.98px) {
+  .bg-hero {
+    background-size: contain; /* หรือ cover แล้วแต่ต้องการ */
+    background-position: center center;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: auto; /* ให้ความสูงปรับตามเนื้อหา */
+    min-height: 230px; /* หรือกำหนดขั้นต่ำ */
+  }
+}
+
+/* ปรับ card ให้ราคาอยู่ล่างสุด  */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.bottom-text {
+  margin-top: auto; /* ดันลงล่างสุด */
+}
+

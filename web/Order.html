@@ -1,0 +1,224 @@
+<!-- Order Page -->
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Astro v5.9.2">
+  <title>My Store | Graphics Card Online Shop</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/product/">
+  <script src="../assets/js/color-modes.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="theme-color" content="#712cf9">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body>
+  <!-- Nav Bar -->
+  <div id="navbar-container"></div>
+
+  <main>
+    <br>
+    <section class=" text-center container">
+
+      <div class=" text-center">
+        <h1 class="h2">Check your orders here </h1>
+        <p class="lead">You can check your orders My Store and track your order by yourself, Thank you for shopping at
+          My Store.</p>
+      </div>
+    </section>
+    <!-- *************************** -->
+    <div class="container mt-4">
+
+      <!-- ปุ่มค้นหา Order -->
+      <button id="btnFindOrders" class="w-100 btn btn-primary btn-lg" type="button">
+        Find your orders
+      </button>
+
+      <hr>
+
+      <!-- ✅ กล่องแสดงรายการ -->
+      <div id="ordersList" class="mt-3"></div>
+
+
+      <!-- ปุ่มเก่า -->
+      <!-- <div class="row g-4">
+        <hr>
+        <button onclick="GetContactInf()" class="w-100 btn btn-primary btn-lg" type="button">Find your orders</button>
+        <hr>
+      </div> -->
+
+
+    </div>
+    <br>
+  </main>
+
+  <footer class="footer-custom py-5">
+    <div class="container">
+      <div class="row text-center text-md-start align-items-center">
+
+        <!-- Contact Column -->
+        <div class="col-md-6 mb-3 mb-md-0">
+          <h6 class="fw-bold">My Store</h6>
+          <p class="mb-1">
+            My Store thanks all our customers for your trust and support. We're proud to deliver top-quality graphic
+            cards for the best gaming experience, and we hope you enjoy the very best from us.
+          </p>
+        </div>
+
+
+        <!-- Social Media Column -->
+        <div class="col-md-3 mb-3 mb-md-0">
+          <h6 class="fw-bold">Product</h6>
+          <p class="mb-1"><i class="bi bi-nvidia me-2"></i></i>NVIDIA Geforce RTX series</p>
+          <p class="mb-1"><i class="bi bi-amd me-2"></i></i>AMD RADEON</p>
+          <p class="mb-1"><i class="bi bi-cpu me-2"></i></i>intel ARC™</p>
+        </div>
+
+        <!-- Contact Column -->
+        <div class="col-md-3 mb-3 mb-md-0">
+          <h6 class="fw-bold">Contact</h6>
+          <p class="mb-1"><i class="bi bi-telephone-fill me-2"></i>089-765-4321</p>
+          <p class="mb-1"><i class="bi bi-envelope-fill me-2"></i>My_Store_s@gmail.com</p>
+          <p class="mb-1"><i class="bi bi-geo-alt-fill me-2"></i>location</p>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="text-center mt-4">
+        <div class="social-icons">
+          <a href="https://www.facebook.com/" target="_blank" class="me-3"><i class="bi bi-facebook"></i></a>
+          <a href="https://twitter.com/" target="_blank" class="me-3"><i class="bi bi-twitter-x"></i></a>
+          <a href="https://www.instagram.com/" target="_blank" class="me-3"><i class="bi bi-instagram"></i></a>
+          <a href="https://line.me/th/" target="_blank"><i class="bi bi-line"></i></a>
+        </div>
+        <p class="mb-1">All rights reserved &copy; Aug 2025 My Portfolio My Store</p>
+        <p><a href="#" class="text-decoration-none">Back to top</a></p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+
+  <!-- roleGuard -->
+  <!-- <script src="/js/roleGuard.js"></script>
+  <script>
+    requireRole(['sales', 'customer', 'admin']);
+  </script> -->
+
+
+  <!-- Navbar Script -->
+  <script src="/js/navbar.js"></script>
+
+  <!-- script สำหรับ Order -->
+  <script>
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) window.location.href = '/login';
+
+    const ordersList = document.getElementById('ordersList');
+    const btn = document.getElementById('btnFindOrders');
+
+    function formatDate(dt) {
+      const d = new Date(dt);
+      return isNaN(d.getTime()) ? dt : d.toLocaleString();
+    }
+
+    function parseListcart(listcart) {
+      if (!listcart) return [];
+      try {
+        return typeof listcart === 'string' ? JSON.parse(listcart) : listcart;
+      } catch {
+        return [];
+      }
+    }
+
+    function renderItems(items) {
+      if (!items.length) return `<div class="text-muted small">No items</div>`;
+
+      return `
+      <ul class="list-group list-group-flush mt-2">
+        ${items.map(it => `
+          <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div>
+              <div class="fw-semibold">${it.name ?? '-'}</div>
+              <div class="text-muted small">product_id: ${it.product_id ?? '-'}</div>
+            </div>
+            <div class="text-end">
+              <div class="small">Qty: ${it.quantity ?? 0}</div>
+              <div class="small">Price: ${Number(it.price ?? 0).toFixed(2)}</div>
+            </div>
+          </li>
+        `).join('')}
+      </ul>
+    `;
+    }
+
+    async function fetchOrders() {
+      ordersList.innerHTML = '<div class="text-muted">Loading...</div>';
+
+      const res = await fetch('/api/order/carts');
+      const data = await res.json();
+
+      if (!res.ok) {
+        ordersList.innerHTML = `<div class="alert alert-danger">${data.message || 'Failed'}</div>`;
+        return;
+      }
+
+      if (!data.length) {
+        ordersList.innerHTML = `<div class="alert alert-warning">No orders found.</div>`;
+        return;
+      }
+
+      ordersList.innerHTML = data.map(o => {
+        const items = parseListcart(o.listcart);
+        const showDelete = user.role === 'admin';
+
+        return `
+        <div class="card mb-3 shadow-sm">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h5 class="card-title mb-1">Order #${o.id}</h5>
+                <div class="text-muted small">User ID: ${o.user_id}</div>
+                <div class="text-muted small">Created: ${formatDate(o.created_at)}</div>
+                <div class="mt-2 fw-semibold">Total: ${Number(o.total_price || 0).toFixed(2)} THB</div>
+              </div>
+
+              ${showDelete ? `
+                <button class="btn btn-danger btn-sm" onclick="deleteOrder(${o.id})">Delete</button>
+              ` : ''}
+            </div>
+
+            ${renderItems(items)}
+          </div>
+        </div>
+      `;
+      }).join('');
+    }
+
+    async function deleteOrder(id) {
+      if (user.role !== 'admin') return;
+      if (!confirm(`Delete Order #${id} ?`)) return;
+
+      const res = await fetch(`/api/order/carts/${id}`, { method: 'DELETE' });
+      const data = await res.json();
+
+      if (!res.ok) return alert(data.message || 'Delete failed');
+      alert('Deleted ✅');
+      fetchOrders();
+    }
+
+    window.deleteOrder = deleteOrder;
+    btn.addEventListener('click', fetchOrders);
+  </script>
+
+
+</body>
