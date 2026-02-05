@@ -1,3 +1,4 @@
+// ส่วน Import และสร้าง Router
 const express = require('express');
 const { ecommerceDB } = require('../config/dbMySQL');
 const router = express.Router();
@@ -7,9 +8,9 @@ const authorize = require('../middlewares/authorize');
 // เพิ่มสินค้า (admin + sales)
 router.post(
   '/',
-  authorize(['admin', 'sales']),
+  authorize(['admin', 'sales']), // เช็คสิทธ์
   async (req, res) => {
-    const { name, description, price, stock, img_url } = req.body;
+    const { name, description, price, stock, img_url } = req.body;  // รับข้อมูลจาก body
 
      // ตรวจสอบความครบถ้วนของข้อมูล (Input Validation) ก่อนส่งเข้า database
     if (!name || price === undefined || stock === undefined) {  // field >> name, price, stock จำเป็นต้องมี
@@ -18,9 +19,10 @@ router.post(
       });
     }
 
+    // Insert to Database
     try {
       const [result] = await ecommerceDB.execute(
-        'INSERT INTO products(name, description, price, stock, img_url) VALUES(?, ?, ?, ?, ?)',
+        'INSERT INTO products(name, description, price, stock, img_url) VALUES(?, ?, ?, ?, ?)', // ? ป้องกัน SQL injection
         [
           name,
           description || null,  // ถ้า description ไม่มี ให้ใส่เป็น null
@@ -44,10 +46,10 @@ router.post(
 // แก้ไขสินค้า (admin + sales)
 router.put(
   '/:id',
-  authorize(['admin', 'sales']),
+  authorize(['admin', 'sales']),  // เช็ตสิทธ์
   async (req, res) => {
-    const { id } = req.params;
-    const { name, description, price, stock, img_url } = req.body;
+    const { id } = req.params;  // รับ id จาก params (เรียก product ตาม id ที่จะแก้)
+    const { name, description, price, stock, img_url } = req.body; // รับค่าที่จะแก้จาก body 
 
     // ตรวจสอบว่ามีข้อมูลตอ้งแก้ไข (อย่างน้อย 1 ฟิลด์)
     if (
@@ -60,6 +62,7 @@ router.put(
       return res.status(400).json({ message: 'No update fields provided' });
     }
 
+    // แก้ไขข้อมูล ตามข้อมูลที่กรอกมา (แก้เฉาะ field ที่ส่งข้อมูลมา)
     try {
       const updates = [];
       const values = [];
@@ -85,6 +88,7 @@ router.put(
         values.push(img_url || null);
       }
 
+      // Update ข้อมูลใน Database
       const sql = `UPDATE products SET ${updates.join(', ')} WHERE id = ?`;
       values.push(id);
 
@@ -102,10 +106,10 @@ router.put(
 );
 
 //  DELETE 
-// ลบสินค้า (admin เท่านั้น)
+// ลบสินค้า (admin และ Sales เท่านั้น)
 router.delete(
   '/:id',
-  authorize(['admin','sales']),
+  authorize(['admin','sales']), // สิทธิ์ในการ Delete
   async (req, res) => {
     const { id } = req.params;
 
@@ -128,7 +132,7 @@ router.delete(
 );
 
 
-// ดูสินค้าทั้งหมด (ทุก role)
+// ดูสินค้าทั้งหมด
 router.get(
   '/',
   authorize(['admin', 'sales', 'customer']),

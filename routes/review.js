@@ -1,3 +1,4 @@
+// ส่วน Import และสร้าง Router
 const express = require("express");
 const router = express.Router();
 const Review = require("../models/review");
@@ -6,24 +7,25 @@ const authorize = require("../middlewares/authorize");
 // CREATE REVIEW (customer เท่านั้น)
 router.post("/", authorize(['customer']), async (req, res) => {
 
-  try {
+  try { // รับข้อมูลจาก frontend
     const { rating, comment } = req.body;
     console.log(req.body)
-    // ถ้า frontend ส่งข้อมูลไม่ครบ แสดง error
-    // if (!product_id || !rating || !comment) {
+
+    // ถ้า frontend ส่งข้อมูลไม่ครบ แสดง error (ต้องมีทั้ง review และ rating ส่งมา)
     if ( !rating || !comment) {
       return res.status(400).json({ message: 'Missing required fields' });
     } 
 
     console.log(req.user.user_id,req.user.username)
 
+    // สร้าง document ใหม่ใน MongoDB
     const newReview = new Review({
       user_id: req.user.user_id,
       username: req.user.username,
       rating: Number(rating),
       comment: comment
     });
-    await newReview.save();
+    await newReview.save(); // บันทึก document ลง collection
 
 
     res.status(201).json({
@@ -35,7 +37,7 @@ router.post("/", authorize(['customer']), async (req, res) => {
   }
 });
 
-// ================= GET REVIEWS =================
+// GET REVIEWS
 router.get("/", async (req, res) => {
   try {
     const reviews = await Review.find().sort({ createdAt: -1 });
@@ -45,7 +47,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ================= DELETE REVIEW (admin เท่านั้น) =================
+// DELETE REVIEW (admin เท่านั้น)
 router.delete("/:id", authorize(['admin']), async (req, res) => {
   try {
     await Review.findByIdAndDelete(req.params.id);

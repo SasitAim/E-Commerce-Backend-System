@@ -1,8 +1,8 @@
 // app.js
-const express = require("express");
-const bodyParser = require("body-parser");
+const express = require("express");         // สร้างเว็บเซิร์ฟเวอร์ด้วย Express
+const bodyParser = require("body-parser");  // รับ JSON body จาก frontend/postman
 const path = require("node:path");
-const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser'); // เก็บ token ไว้ใช้ authorize
 
 // เชื่อมต่อ MongoDB
 const connectMongo = require('./config/dbMongo');
@@ -12,8 +12,7 @@ const Review = require('./models/review');
 const authRouter = require('./routes/auth');
 const productRouter = require('./routes/product');
 const cartRouter = require('./routes/cart');
-// const OPRouter = require('./routes/purchase_orders');
-const addressRouter = require('./routes/customerAdd');
+// const addressRouter = require('./routes/customerAdd');
 const orderRouter = require('./routes/order');
 const reviewRouter = require('./routes/review');
 
@@ -52,7 +51,7 @@ app.use('/api/cart', authorize(['customer', 'admin']), cartRouter);
 
 
 
-app.use('/api/address', authorize, addressRouter);
+// app.use('/api/address', authorize, addressRouter);
 
 
 app.use('/api/order', authorize(['customer', 'admin']), orderRouter); // แก้จากอันบน (ให้เข้าได้เฉพาะ 'customer', 'admin' )
@@ -92,9 +91,6 @@ app.get("/cart", authorize(['customer', 'admin']), (req, res) => {
 app.get("/login", (req, res) => {
   res.sendFile(__dirname + '/web/login.html');
 });
-
-
-
 
 // app.listen(3000, () => {
 //   console.log("App listening on port 3000! ")

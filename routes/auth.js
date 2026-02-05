@@ -1,4 +1,4 @@
-// routes/auth.js
+// ส่วน Import และสร้าง Router
 const express = require('express');
 const bcrypt = require('bcrypt');
 const { authDB } = require('../config/dbMySQL');
@@ -59,33 +59,33 @@ router.post('/register', async (req, res) => {                  // ใช้ asy
 
 /* ================= LOGIN ================= */
 router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password } = req.body;    // ดึงข้อมูล username และ password จาก (Frontend)
 
-    try {
+    try {   // ค้นหาข้อมูล user ว่ามีใน Database หรือไม่
         const [rows] = await authDB.execute(
             'SELECT * FROM users WHERE username = ?',
             [username]
         );
-
+            // ถ้าไม่มีแสดงข้อความตามนี้
         if (rows.length === 0) {
             return res.status(404).json({ message: 'User not found' });
         }
 
         const user = rows[0];
-        const isPasswordValid = await bcrypt.compare(password, user.hashedpassword);
+        const isPasswordValid = await bcrypt.compare(password, user.hashedpassword); // เทียบรหัสที่ส่งมา กับที่ hash ไว้
 
         if (!isPasswordValid) {
-            return res.status(401).json({ message: 'Invalid credentials' });
+            return res.status(401).json({ message: 'Invalid credentials' }); 
         }
 
-        const token = jwt.sign(
+        const token = jwt.sign(  // สร้าง Token โดยฝังข้อมูลผู้ใช้ลงไป (ID, Role)
             {
                 user_id: user.id,
                 username: user.username,
                 role: user.role
             },
             JWT_SECRET,
-            { expiresIn: '1h' }
+            { expiresIn: '1h' } // อายุ token
         );
 
         // JWT เก็บใน cookie (ต้องใส่หลังจาก Login แล้ว)
