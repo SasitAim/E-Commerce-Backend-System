@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
         return res.status(400).json({ message: 'Missing billing_address' });
     }
 
-    // แก้ไข
+    // สำหรับเก็บข้อมูลที่อยู่
     const first_name = billing_address.first_name;
     const last_name = billing_address.last_name;
     const email = billing_address.email || null;
