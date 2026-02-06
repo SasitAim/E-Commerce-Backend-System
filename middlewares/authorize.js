@@ -2,12 +2,12 @@
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = 'my_super_secret_key';
 
-function authorize(allowedRoles = []) {
+function authorize(allowedRoles = []) { // list role ที่มีสิทธิ์เข้า route นี้ได้
   return (req, res, next) => {
 
     let token = null;
 
-    // อ่านจาก Cookie (กรณีเรียกจากหน้าเว็บ)
+    // อ่าน token จาก Cookie (กรณีเรียกจากหน้าเว็บ)
     if (req.cookies && req.cookies.token) {
       token = req.cookies.token;
     }
@@ -19,13 +19,16 @@ function authorize(allowedRoles = []) {
         token = authHeader.split(' ')[1];
       }
     }
-    console.log("test token01");
+
+    console.log("test token01");  // Check
     console.log(token);
+
     // ยังไม่มี token
     if (!token) {
       return res.status(401).json({ message: 'Unauthorized: No token' });
     }
 
+    // Check token ว่าถูกต้องไหม และตรวจวันหมดอายุ
     try {
       const decoded = jwt.verify(token, JWT_SECRET);
 

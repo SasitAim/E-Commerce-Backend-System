@@ -1,39 +1,5 @@
 // 1 Product Page
-//  JS product page filter brand and sort by price
-const brandFilter = document.getElementById('brandFilter');
-const priceSort = document.getElementById('priceSort');
-const productsContainer = document.querySelector('.row.row-cols-1');
-
-// Filter สินค้า
-function filterAndSortProducts() {
-  let products = Array.from(productsContainer.children);
-  let brand = brandFilter.value;
-  let sort = priceSort.value;
-
-  // Filter by Brand
-  products.forEach(product => {
-    if (brand === 'all' || product.dataset.brand === brand) {
-      product.style.display = '';
-    } else {
-      product.style.display = 'none';
-    }
-  });
-
-  // Sort by Price
-  if (sort !== 'none') {
-    products.sort((a, b) => {
-      let priceA = Number.parseInt(a.dataset.price);
-      let priceB = Number.parseInt(b.dataset.price);
-      return sort === 'asc' ? priceA - priceB : priceB - priceA;
-    });
-    products.forEach(p => productsContainer.appendChild(p));
-  }
-}
-
-if (brandFilter && priceSort && productsContainer) {
-  brandFilter.addEventListener('change', filterAndSortProducts);
-  priceSort.addEventListener('change', filterAndSortProducts);
-}
+//  สำหรับ filter brand and sort by price (จากโปรเจด frontend)
 
 // Contact page
 let contactList = JSON.parse(localStorage.getItem("contacts")) || [];
@@ -52,7 +18,7 @@ function GetContactInf() {
     return;
   }
 
-  // ดึงค่าที่กรอกข้อมูลมา
+  // ดึงค่าที่กรอกข้อมูลมา (ไม่ได้ส่งไป backend)
   const contactData = {
     firstName: FirstN_ContP,
     lastName: LastN_ContP,
@@ -99,7 +65,7 @@ function addToCart(product_id, name, price) {
   if (existingItem) {
     existingItem.quantity++;
   } else {
-    cart.push({ product_id, name, price, quantity: 1 }); // ✅ มี product_id
+    cart.push({ product_id, name, price, quantity: 1 }); // มี product_id
   }
 
   saveCart();
@@ -166,11 +132,11 @@ document.addEventListener('click', function (event) {
   if (event.target.classList.contains('add-to-cart')) {
     const productCol = event.target.closest('.col');
 
-    const product_id = Number(productCol.dataset.id);           // ✅ เพิ่ม
+    const product_id = Number(productCol.dataset.id);           // เพิ่ม
     const productName = productCol.dataset.name;
     const productPrice = Number.parseFloat(productCol.dataset.price);
 
-    addToCart(product_id, productName, productPrice);           // ✅ เปลี่ยน signature
+    addToCart(product_id, productName, productPrice);           // เปลี่ยน signature
   }
 });
 
@@ -181,8 +147,6 @@ document.addEventListener("DOMContentLoaded", renderCart);
 
 // ---------------------------------------------------------------------------------------------------------------
 // 3 Cart เก็บข้อมูลที่อยู่, ข้อมูลการจ่ายเงิน และสินค้า
-// ประกาศ 
-let billList = JSON.parse(localStorage.getItem("billAddress")) || [];
 
 // ดึงข้อมูลจากช่องกรอกข้อมูล
 function GetBillAddInf() {
@@ -251,9 +215,6 @@ function GetBillAddInf() {
 
 
   alert("บันทึกข้อมูลการชำระเงินเรียบร้อยแล้ว!");
-
-  let token = localStorage.getItem("token") || "";
-  console.log(token)
 
 };
 
